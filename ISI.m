@@ -1,30 +1,29 @@
-N = 1; % Number of bits 
-L = 5; 
+N = 7; % number of bits 
+L = 10; %number of pathes
 x = round(rand(1,N)); 
-x = (2 * x) - 1
+x = (2 * x) - 1 %BPSK symbols
 X = ones(L, N);
-X = x.*X
+X = x.*X; %the real message in different channels
 
+h = MultipathChannel(L,1); %channels effect
 
-SNR = [-15:0];
-energyPerBit = 1;
-BER = cell(L, 1);
-h = MultipathChannel(L,N);
+H = tril(toeplitz(h));
+H_inv = inv(H);
 
-H = cell(N, 1); % Path effect cell of matrices
-H_inv = cell(N, 1); % inverse path effect cell of matrices
+n = randn(size(X)); %generating noise with varience = 1, mean = 0
 
-for i = 1 : 1 : N   % Channel effect matrix to every path (N paths)
-    
-   H{i} = tril(toeplitz(h(:,i))); % Path effect lower triangle toeplitz matrix
-   H_inv{i} = inv(H{i}); % Inverse path effect lower triangle toeplitz matrix
+Y = H * X + n;
+X_new = H_inv * Y;
 
+counter = size(X_new, 1) * size(X_new, 2);
+
+for i = 1 : counter
+  if X_new(i) >= 0
+    X_new(i) = 1;
+  else
+    X_new(i) = -1;
+  end
 end
 
-Y = cell(L, 1);
-n = cell(L, 1);
-X_new = cell(L, 1);
-n{1} = randn(size(x));
-
-Y = H{1} * X + n{1}
-X_new = H_inv{1} * Y
+%X
+%X_new
