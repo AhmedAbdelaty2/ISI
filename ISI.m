@@ -15,7 +15,7 @@ SNR = [-15 : 0];
 for l = 1 : length(SNR)
   
   No = 1/(10**(SNR(l)/10))
-  n = No/2 * randn(size(X)); %generating noise with varience = 1, mean = 0
+  n = No/2 * randn(size(X)); %generating noise
 
   Y = H * X + n;
   X_new = H_inv * Y;
