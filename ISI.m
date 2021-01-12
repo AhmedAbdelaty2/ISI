@@ -10,7 +10,7 @@ X = x.*X;                 %the real message in different pathes
 x_rep = zeros(1, N*fs);   %the inistialization of the repeated the message
 X_rep = ones(L, N*fs);    %the inistialization of the repeated message in different pathes
 
-c = 1;              #counter 
+c = 1;              %counter 
 for i = 1 : N
   for j = 1 : fs
     x_rep(c) = x(i);
