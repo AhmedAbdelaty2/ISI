@@ -40,7 +40,7 @@ BER2 = zeros(size(SNR));      %bit error rate for matched filter technique
 for l = 1 : length(SNR)
   
   %decoding the message without matched filter
-  No1 = Eb/(10**(SNR(l)/10));
+  No1 = Eb/(10^(SNR(l)/10));
   n1 = No1/2 * randn(size(X));   %generating noise element
   Y1 = H * X + n1;               %deleverd message
   X_new1 = H_inv * Y1;           %deleverd message after removing pathes effect
@@ -62,7 +62,7 @@ for l = 1 : length(SNR)
   BER1(l) = cnt_Error1 / counter;
   
   %decoding the message usnig matched filter
-  No2 = Eb/(10**(SNR(l)/10));
+  No2 = Eb/(10^(SNR(l)/10));
   n2 = No2/2 * randn(size(X_rep));
   Y2 = H * X_rep + n2;
   X_new2 = H_inv * Y2;
