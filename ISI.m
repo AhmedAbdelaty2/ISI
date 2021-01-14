@@ -56,6 +56,7 @@ for l = 1 : length(SNR)
     end
   end
 
+
   %computing bit error rate
   Error1 = abs(X - X_new1);
   cnt_Error1 = sum(Error1(Error1==2)) / 2;
