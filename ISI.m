@@ -68,7 +68,7 @@ for l = 1 : length(SNR)
   X_new2 = H_inv * Y2;
   
   %computing the convolution of the recieved message and the matched filter pulse
-  Z = zeros(L, size(X_new2, 2)+length(MF)-1);  #inistialization for the convolution matrix
+  Z = zeros(L, size(X_new2, 2)+length(MF)-1);  %inistialization for the convolution matrix
   for p = 1 : L
     Z(p, :) = conv(X_new2(p, :), MF);
   end
